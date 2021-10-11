@@ -42,17 +42,13 @@ public class Server
 
             String res = Arrays.toString(result);
             System.out.println("Recieved from client : "+res);
+
+                //echoing back to client
+                byte[] arr = new byte[]{1,67,0,30,0,30,0,0,30,0,0,0,0,2,67,0,97,0,114,0,100,0,105,0,111,0,108,0,111,0,103,0,105,0,97,0, (byte) 254,0,49,0, (byte) 255,0,67,0,105,0,114,0,117,0,114,0,103,0,105,0,97,0, (byte) 254,0,50,0, (byte) 255,0,3,0,4};
+                   out.write(arr);
+
         }
 
-
-            //echoing back to client
-         //   out.write(result);
-
-            //System.out.println("Closing connection");
-
-            // close connection
-         //   socket.close();
-           // in.close();
         }
         catch(IOException i)
         {
