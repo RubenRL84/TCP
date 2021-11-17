@@ -16,39 +16,41 @@ public class Server
     {
          Boolean serveron = true;
         // starts server and waits for a connection
-        try
-        {
+        try {
             server = new ServerSocket(port);
             System.out.println("Server started");
 
             System.out.println("Waiting for a client ...");
-            while (serveron ){
-            socket = server.accept();
+            while (serveron) {
+                socket = server.accept();
 
-            System.out.println("Client accepted");
+                System.out.println("Client accepted");
 
-            // takes input from the client socket
-            in = new DataInputStream(socket.getInputStream());
-            //writes on client socket
-            out = new DataOutputStream(socket.getOutputStream());
+                // takes input from the client socket
+                in = new DataInputStream(socket.getInputStream());
+                //writes on client socket
+                out = new DataOutputStream(socket.getOutputStream());
 
 
-            // Receiving data from client
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            byte buffer[] = new byte[1024];
-            baos.write(buffer, 0 , in.read(buffer));
+                // Receiving data from client
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                byte buffer[] = new byte[1024];
+                baos.write(buffer, 0, in.read(buffer));
 
-            byte result[] = baos.toByteArray();
+                byte result[] = baos.toByteArray();
 
-            String res = Arrays.toString(result);
-            System.out.println("Recieved from client : "+res);
+                String res = Arrays.toString(result);
+                System.out.println("Recieved from client : " + res);
+
 
                 //echoing back to client
-                byte[] arr = new byte[]{1,67,0,30,0,30,0,0,30,0,0,0,0,2,67,0,97,0,114,0,100,0,105,0,111,0,108,0,111,0,103,0,105,0,97,0, (byte) 254,0,49,0, (byte) 255,0,67,0,105,0,114,0,117,0,114,0,103,0,105,0,97,0, (byte) 254,0,50,0, (byte) 255,0,3,0,4};
-                   out.write(arr);
+              //  byte[] arr = new byte[]{1, 67, 0, 30, 0, 30, 0, 0, 30, 0, 0, 0, 0, 2, 67, 0, 97, 0, 114, 0, 100, 0, 105, 0, 111, 0, 108, 0, 111, 0, 103, 0, 105, 0, 97, 0, (byte) 254, 0, 49, 0, (byte) 255, 0, 67, 0, 105, 0, 114, 0, 117, 0, 114, 0, 103, 0, 105, 0, 97, 0, (byte) 254, 0, 50, 0, (byte) 255, 0, 3, 0, 4};
+                byte[] arr = new byte[]{1, 67, 0, 30, 0, 30, 0, 0, 30, 0, 0, 0, 0, 2,49,0,(byte) 254,0,67, 0, 97, 0, 114, 0, 100, 0, 105, 0, 111, 0, 108, 0, 111, 0, 103, 0, 105, 0, 97, 0 ,(byte) 255,0,50,0,(byte) 254,0,67, 0, 105, 0, 114, 0, 117, 0, 114, 0, 103, 0, 105, 0, 97,0,(byte) 255, 0, 3, 0, 4};
 
-        }
+                out.write(arr);
+                out.flush();
 
+            }
         }
         catch(IOException i)
         {
